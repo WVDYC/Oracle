@@ -1,0 +1,9 @@
+/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/ecolor-6e908d34f146dce9.d: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/color32.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva_gamma.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/rgba.rs
+
+/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libecolor-6e908d34f146dce9.rmeta: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/color32.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva_gamma.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/rgba.rs
+
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/lib.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/color32.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva_gamma.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/hsva.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ecolor-0.22.0/src/rgba.rs:

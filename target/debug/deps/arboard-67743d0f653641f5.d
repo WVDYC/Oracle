@@ -1,0 +1,10 @@
+/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/arboard-67743d0f653641f5.d: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/common.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/osx.rs
+
+/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libarboard-67743d0f653641f5.rlib: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/common.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/osx.rs
+
+/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libarboard-67743d0f653641f5.rmeta: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/common.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/osx.rs
+
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/lib.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/common.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/mod.rs:
+/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/arboard-3.6.1/src/platform/osx.rs:
