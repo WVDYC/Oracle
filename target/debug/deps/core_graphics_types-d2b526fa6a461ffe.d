@@ -1,9 +1,0 @@
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/core_graphics_types-d2b526fa6a461ffe.d: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/base.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/geometry.rs
-
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libcore_graphics_types-d2b526fa6a461ffe.rlib: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/base.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/geometry.rs
-
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libcore_graphics_types-d2b526fa6a461ffe.rmeta: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/base.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/geometry.rs
-
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/lib.rs:
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/base.rs:
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/core-graphics-types-0.1.3/src/geometry.rs:

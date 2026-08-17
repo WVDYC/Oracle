@@ -1,8 +1,0 @@
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/pulp-05eac9dd903ff5ac.d: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/aarch64/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/aarch64.rs
-
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/deps/libpulp-05eac9dd903ff5ac.rmeta: /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/lib.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/aarch64/mod.rs /Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/aarch64.rs
-
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/lib.rs:
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/mod.rs:
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/core_arch/aarch64/mod.rs:
-/Users/altemirzhilkibayev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pulp-0.22.3/src/aarch64.rs:
