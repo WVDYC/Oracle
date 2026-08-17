@@ -1,4 +1,4 @@
-// Waddington-X BioTech Platform - Native Desktop Application Launcher
+// Oracle - Scientific Research Workstation Launcher
 // High-performance modeling and interactive visualization of Epigenetic Landscapes
 
 mod data;
@@ -17,9 +17,9 @@ fn main() -> Result<(), eframe::Error> {
         ..Default::default()
     };
 
-    println!("Starting Waddington-X BioTech Scientific Research Workstation (eframe/egui)...");
+    println!("Starting Oracle Scientific Research Workstation (eframe/egui)...");
     eframe::run_native(
-        "Waddington-X BioTech Platform | Epigenetic Landscape & Phenotype Dynamics Workstation",
+        "Oracle | Epigenetic Landscape & Phenotype Dynamics Workstation",
         options,
         Box::new(|_cc| Box::new(WaddingtonGuiApp::default())),
     )

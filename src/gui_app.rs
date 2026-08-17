@@ -1,4 +1,4 @@
-// Waddington-X BioTech Platform - Scientific Research Workstation
+// Oracle - Scientific Research Workstation
 // High-Performance Desktop Interface for Epigenetic Landscapes, FACS Gating,
 // Nonlinear Bifurcations, Time-Series Kinetics, and Drug Perturbation Assays.
 
@@ -55,10 +55,10 @@ impl Default for WaddingtonGuiApp {
             selected_sample_type: SampleDatasetType::TumorMicroenvironment,
             active_tab: WorkstationTab::Landscape2D,
             custom_csv_path: "data/single_cell_sample.csv".to_string(),
-            status_message: "Waddington-X Research Workstation ready. Stochastic simulation active.".to_string(),
+            status_message: "Oracle Research Workstation ready. Stochastic simulation active.".to_string(),
             population_target_count: cell_count,
-            export_csv_name: "waddington_cell_population.csv".to_string(),
-            export_png_name: "waddington_scientific_figure.png".to_string(),
+            export_csv_name: "oracle_cell_population.csv".to_string(),
+            export_png_name: "oracle_scientific_figure.png".to_string(),
         }
     }
 }
@@ -90,8 +90,8 @@ impl WaddingtonGuiApp {
         egui::TopBottomPanel::top("top_header_panel").show(ctx, |ui| {
             ui.add_space(4.0);
             ui.horizontal(|ui| {
-                ui.heading(RichText::new("🧬 Waddington-X").strong().color(Color32::from_rgb(56, 189, 248)));
-                ui.label(RichText::new("Epigenetic Landscape Research Workstation").color(Color32::from_rgb(148, 163, 184)));
+                ui.heading(RichText::new("🔮 Oracle").strong().color(Color32::from_rgb(56, 189, 248)));
+                ui.label(RichText::new("Epigenetic Landscape & Phenotype Dynamics Workstation").color(Color32::from_rgb(148, 163, 184)));
 
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                     if ui.button(RichText::new("↺ Reset M0").color(Color32::from_rgb(226, 232, 240))).clicked() {
@@ -332,22 +332,22 @@ impl WaddingtonGuiApp {
 
                         if ui.button("Save Full Scientific Summary Report").clicked() {
                             let report = export_population_summary_report(&self.model.stats, &self.model.params, self.model.sim_time);
-                            if fs::write("waddington_scientific_report.txt", report).is_ok() {
-                                self.status_message = "Saved 'waddington_scientific_report.txt'.".to_string();
+                            if fs::write("oracle_scientific_report.txt", report).is_ok() {
+                                self.status_message = "Saved 'oracle_scientific_report.txt'.".to_string();
                             }
                         }
 
                         if ui.button("Save FACS Gating Report").clicked() {
                             let facs_txt = export_facs_gating_report(&self.facs_report, &self.facs_gates);
-                            if fs::write("waddington_facs_report.txt", facs_txt).is_ok() {
-                                self.status_message = "Saved 'waddington_facs_report.txt'.".to_string();
+                            if fs::write("oracle_facs_report.txt", facs_txt).is_ok() {
+                                self.status_message = "Saved 'oracle_facs_report.txt'.".to_string();
                             }
                         }
 
                         if ui.button("Save Time-Series Kinetics CSV").clicked() {
                             let ts_csv = export_time_series_csv(&self.model.time_series_history);
-                            if fs::write("waddington_kinetics_timeseries.csv", ts_csv).is_ok() {
-                                self.status_message = "Saved 'waddington_kinetics_timeseries.csv'.".to_string();
+                            if fs::write("oracle_kinetics_timeseries.csv", ts_csv).is_ok() {
+                                self.status_message = "Saved 'oracle_kinetics_timeseries.csv'.".to_string();
                             }
                         }
                     });

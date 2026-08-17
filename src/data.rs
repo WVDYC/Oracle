@@ -318,8 +318,8 @@ pub fn export_time_series_csv(history: &VecDeque<TimeSeriesPoint>) -> String {
 
 pub fn export_facs_gating_report(report: &FacsAnalysisReport, gates: &FacsGatingGates) -> String {
     format!(
-        "# Waddington-X BioTech Platform - Flow Cytometry (FACS) Gating Report\n\
-        ====================================================================\n\
+        "# Oracle Platform - Flow Cytometry (FACS) Gating Report\n\
+        ========================================================\n\
         Total Gated Events:    {}\n\
         Gate X Threshold:      {:.3} (STAT1 / CD80)\n\
         Gate Y Threshold:      {:.3} (STAT6 / CD206)\n\n\
@@ -351,8 +351,8 @@ pub fn export_facs_gating_report(report: &FacsAnalysisReport, gates: &FacsGating
 
 pub fn export_population_summary_report(stats: &PopulationStats, params: &BiophysicalParams, sim_time: f32) -> String {
     format!(
-        "# Waddington-X BioTech Platform - Simulation Report\n\
-        ====================================================\n\
+        "# Oracle Platform - Simulation Report\n\
+        ======================================\n\
         Simulation Time Elapsed: {:.2}s\n\
         Total Simulated Cells:   {}\n\n\
         --- Microenvironmental Inputs ---\n\

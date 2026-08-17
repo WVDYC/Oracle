@@ -1,9 +1,9 @@
 [package]
-name = "waddington_gui_app"
+name = "oracle"
 version = "1.0.0"
 edition = "2021"
 authors = ["Altemir Zhilkibaev <altemirzhilkibaev@gmail.com>"]
-description = "Native Desktop GUI Application (eframe/egui) for Waddington Epigenetic Landscapes, Phenotype Dynamics (M1, M2, M3), Custom CSV Analysis, and PNG Export"
+description = "Oracle - Interactive Epigenetic Landscape & Macrophage Phenotype Dynamics Research Workstation (Rust / egui)"
 
 [dependencies]
 eframe = "0.22"

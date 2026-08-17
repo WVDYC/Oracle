@@ -1,4 +1,4 @@
-# Waddington-X BioTech Platform 🧬
+# Oracle 🔮
 ### Epigenetic Landscape & Macrophage Phenotype Dynamics Research Workstation
 
 [![Rust](https://img.shields.io/badge/Rust-2021_Edition-orange?logo=rust)](https://www.rust-lang.org/)
@@ -20,7 +20,7 @@
 
 Cellular differentiation and phenotypic plasticity (e.g., macrophage polarization across **M0, M1, M2, and M3/Hybrid** states) represent nonlinear dynamical systems governed by mutually repressive gene regulatory networks (GRNs).
 
-**Waddington-X** provides a high-performance, real-time native desktop workstation written in **Rust** to explore:
+**Oracle** provides a high-performance, real-time native desktop workstation written in **Rust** to explore:
 1. **Waddington Quasi-Potential Landscapes $U(x, y)$:** Multistable energy topography with deep attractor valleys and transition barriers ($\Delta U$).
 2. **Nonlinear GRN Toggle Switch with Hill Kinetics:** Mutual cross-inhibition between master transcription factors (STAT1/NF-$\kappa$B vs. STAT6/PPAR-$\gamma$).
 3. **Single-Cell Stochastic Dynamics (Langevin Equations):** Real-time Euler-Maruyama simulation of single cells experiencing transcriptional noise ($\sigma$) and jumping across epigenetic barriers.
@@ -102,7 +102,7 @@ cargo run --release
 
 Дифференцировка и фенотипическая пластичность клеток (например, поляризация макрофагов по состояниям **M0, M1, M2, M3/Hybrid**) представляют собой нелинейные динамические системы, управляемые взаимно ингибирующими генно-регуляторными сетями (GRN).
 
-**Waddington-X** — это высокопроизводительная исследовательская рабочая станция на **Rust**, созданная для:
+**Oracle** — это высокопроизводительная исследовательская рабочая станция на **Rust**, созданная для:
 1. **Моделирования эпигенетического ландшафта Уоддингтона $U(x, y)$:** Расчет топографии потенциальной энергии с долинами аттракторов и барьерами переходов ($\Delta U$).
 2. **Нелинейных дифференциальных уравнений с кинетикой Хилла:** Взаимное подавление транскрипционных факторов STAT1/NF-$\kappa$B vs STAT6/PPAR-$\gamma$.
 3. **Стохастической динамики единичных клеток (уравнения Ланжевена):** Симуляция в реальном времени сотен клеток со стохастическим шумом транскрипции ($\sigma$).
