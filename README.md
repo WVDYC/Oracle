@@ -21,27 +21,27 @@
 Cellular differentiation and phenotypic plasticity (e.g., macrophage polarization across **M0, M1, M2, and M3/Hybrid** states) represent nonlinear dynamical systems governed by mutually repressive gene regulatory networks (GRNs).
 
 **Oracle** provides a high-performance, real-time native desktop workstation written in **Rust** to explore:
-1. **Waddington Quasi-Potential Landscapes $U(x, y)$:** Multistable energy topography with deep attractor valleys and transition barriers ($\Delta U$).
-2. **Nonlinear GRN Toggle Switch with Hill Kinetics:** Mutual cross-inhibition between master transcription factors (STAT1/NF-$\kappa$B vs. STAT6/PPAR-$\gamma$).
-3. **Single-Cell Stochastic Dynamics (Langevin Equations):** Real-time Euler-Maruyama simulation of single cells experiencing transcriptional noise ($\sigma$) and jumping across epigenetic barriers.
+1. **Waddington Quasi-Potential Landscapes U(x, y):** Multistable energy topography with deep attractor valleys and transition barriers (ΔU).
+2. **Nonlinear GRN Toggle Switch with Hill Kinetics:** Mutual cross-inhibition between master transcription factors (STAT1/NF-κB vs. STAT6/PPAR-γ).
+3. **Single-Cell Stochastic Dynamics (Langevin Equations):** Real-time Euler-Maruyama simulation of single cells experiencing transcriptional noise (σ) and jumping across epigenetic barriers.
 4. **Flow Cytometry (FACS) 4-Quadrant Gating:** Standard FlowJo-compatible quadrant analysis (Q1–Q4) with dynamic threshold dragging and Mean Fluorescence Intensity (MFI) computation.
 5. **Epigenetic Hysteresis & Bifurcations:** S-shaped fold bifurcation curves explaining lineage commitment and epigenetic memory.
-6. **Pharmacological Drug Screening:** In silico simulation of FDA-approved & experimental compounds (JAK1/2 inhibitors, anti-IL4R mAbs, TLR4 antagonists, HIF-1$\alpha$ inhibitors, HDAC inhibitors).
+6. **Pharmacological Drug Screening:** In silico simulation of FDA-approved & experimental compounds (JAK1/2 inhibitors, anti-IL4R mAbs, TLR4 antagonists, HIF-1α inhibitors, HDAC inhibitors).
 7. **Real-World Data Integration:** Ingestion of single-cell RNA-seq (scRNA-seq) and Flow Cytometry CSV datasets with automatic coordinate mapping.
 
 ---
 
 ## 🔬 Mathematical Formulations
 
-### 1. Nonlinear GRN Differential Equations (Drift Vector $\vec{F}$)
+### 1. Nonlinear GRN Differential Equations (Drift Vector F)
 $$\frac{dx}{dt} = \frac{\alpha_1 x^n + S_{\text{LPS}}^{\text{eff}} + 0.10}{1 + x^n + \gamma_1 y^n} + \text{Hypoxia}_x - \delta_1 x$$
 $$\frac{dy}{dt} = \frac{\alpha_2 y^n + S_{\text{IL4}}^{\text{eff}} + 0.10}{1 + y^n + \gamma_2 x^n} + \text{Hypoxia}_y - \delta_2 y$$
 
-* $x$: Activity of the Pro-inflammatory Master Axis (STAT1 / NF-$\kappa$B / iNOS $\to$ **M1**).
-* $y$: Activity of the Pro-healing / Tissue Repair Axis (STAT6 / PPAR-$\gamma$ / Arg1 $\to$ **M2**).
-* $n$: Hill cooperativity coefficient ($n \ge 2$).
-* $\gamma$: Cross-inhibition strength.
-* $\delta$: Degradation rate.
+* **x**: Activity of the Pro-inflammatory Master Axis (STAT1 / NF-κB / iNOS → **M1**).
+* **y**: Activity of the Pro-healing / Tissue Repair Axis (STAT6 / PPAR-γ / Arg1 → **M2**).
+* **n**: Hill cooperativity coefficient ($n \ge 2$).
+* **γ**: Cross-inhibition strength.
+* **δ**: Degradation rate.
 
 ### 2. Stochastic Langevin Single-Cell Integration
 $$d\mathbf{r}_i = \mathbf{F}(\mathbf{r}_i)\,dt + \sigma_{\text{eff}}\,\sqrt{dt}\,\mathbf{\xi}_i, \quad \mathbf{\xi}_i \sim \mathcal{N}(0, \mathbf{I})$$
@@ -103,12 +103,12 @@ cargo run --release
 Дифференцировка и фенотипическая пластичность клеток (например, поляризация макрофагов по состояниям **M0, M1, M2, M3/Hybrid**) представляют собой нелинейные динамические системы, управляемые взаимно ингибирующими генно-регуляторными сетями (GRN).
 
 **Oracle** — это высокопроизводительная исследовательская рабочая станция на **Rust**, созданная для:
-1. **Моделирования эпигенетического ландшафта Уоддингтона $U(x, y)$:** Расчет топографии потенциальной энергии с долинами аттракторов и барьерами переходов ($\Delta U$).
-2. **Нелинейных дифференциальных уравнений с кинетикой Хилла:** Взаимное подавление транскрипционных факторов STAT1/NF-$\kappa$B vs STAT6/PPAR-$\gamma$.
-3. **Стохастической динамики единичных клеток (уравнения Ланжевена):** Симуляция в реальном времени сотен клеток со стохастическим шумом транскрипции ($\sigma$).
+1. **Моделирования эпигенетического ландшафта Уоддингтона U(x, y):** Расчет топографии потенциальной энергии с долинами аттракторов и барьерами переходов (ΔU).
+2. **Нелинейных дифференциальных уравнений с кинетикой Хилла:** Взаимное подавление транскрипционных факторов STAT1/NF-κB vs STAT6/PPAR-γ.
+3. **Стохастической динамики единичных клеток (уравнения Ланжевена):** Симуляция в реальном времени сотен клеток со стохастическим шумом транскрипции (σ).
 4. **Проточной цитометрии (FACS 4-Quadrant Gating):** Классический 4-квадрантный анализ проточной цитометрии (Q1–Q4) с интерактивным перетаскиванием порогов гейтирования и расчетом средней интенсивности флуоресценции (MFI).
 5. **Бифуркаций и эпигенетического гистерезиса:** S-образные кривые, объясняющие феномен клеточной памяти и устойчивости фенотипа.
-6. **Фармакологического тестирования (Drug Screening):** Тестирование ингибиторов JAK1/2, антител к IL-4R, антагонистов TLR4, блокаторов HIF-1$\alpha$ и HDAC-ингибиторов.
+6. **Фармакологического тестирования (Drug Screening):** Тестирование ингибиторов JAK1/2, антител к IL-4R, антагонистов TLR4, блокаторов HIF-1α и HDAC-ингибиторов.
 7. **Интеграции с лабораторными данными:** Загрузка таблиц scRNA-seq и проточной цитометрии из CSV с авто-масштабированием.
 
 ---
