@@ -1,1 +1,0 @@
-/Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/target/debug/waddington_gui_app: /Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/src/gui_app.rs /Users/altemirzhilkibayev/programing/project/WaddingtonX_Native_GUI_App/src/main.rs
