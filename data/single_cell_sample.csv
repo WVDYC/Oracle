@@ -1,0 +1,11 @@
+Cell_ID,STAT1,STAT6,Phenotype,Cluster
+SC_BMDM_001,2.35,0.18,M1_Polarized,Cluster_1
+SC_BMDM_002,2.15,0.32,M1_Polarized,Cluster_1
+SC_BMDM_003,1.95,0.41,M1_Intermediate,Cluster_1
+SC_BMDM_004,0.22,2.45,M2_Polarized,Cluster_2
+SC_BMDM_005,0.35,2.10,M2_Polarized,Cluster_2
+SC_BMDM_006,0.48,1.90,M2_Intermediate,Cluster_2
+SC_BMDM_007,0.42,0.38,M0_Resting,Cluster_0
+SC_BMDM_008,0.51,0.45,M0_Resting,Cluster_0
+SC_BMDM_009,1.75,1.80,M3_Hypoxic_Hybrid,Cluster_3
+SC_BMDM_010,1.60,1.70,M3_Hypoxic_Hybrid,Cluster_3
