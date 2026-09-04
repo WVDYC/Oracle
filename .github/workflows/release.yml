@@ -96,7 +96,7 @@ jobs:
     name: Publish GitHub Release
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     steps:
       - name: Download all built artifacts
         uses: actions/download-artifact@v4
@@ -109,6 +109,8 @@ jobs:
       - name: Create Release and Upload Assets
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v1.0.0
+          name: "🔮 Oracle v1.0.0 — Epigenetic Landscape & Phenotype Workstation"
           files: |
             release_assets/*/*
           generate_release_notes: true
