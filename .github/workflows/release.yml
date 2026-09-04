@@ -75,11 +75,50 @@ jobs:
           cp target/${{ matrix.target }}/release/${{ matrix.binary_name }} ./${{ matrix.asset_name }}
           chmod +x ./${{ matrix.asset_name }}
 
+      - name: Package macOS Application (.app bundle in .zip)
+        if: matrix.os == 'macos-latest'
+        run: |
+          mkdir -p "Oracle.app/Contents/MacOS"
+          mkdir -p "Oracle.app/Contents/Resources"
+          cp target/${{ matrix.target }}/release/oracle "Oracle.app/Contents/MacOS/oracle"
+          chmod +x "Oracle.app/Contents/MacOS/oracle"
+          cp assets/icon.png "Oracle.app/Contents/Resources/icon.png"
+          cat << 'EOF' > "Oracle.app/Contents/Info.plist"
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>oracle</string>
+              <key>CFBundleIconFile</key>
+              <string>icon.png</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.wvdyc.oracle</string>
+              <key>CFBundleName</key>
+              <string>Oracle</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+              <key>CFBundleShortVersionString</key>
+              <string>1.0.0</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>11.0</string>
+          </dict>
+          </plist>
+          EOF
+          zip -r "oracle-macos-arm64.zip" "Oracle.app"
+
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset_name }}
           path: ./${{ matrix.asset_name }}
+
+      - name: Upload macOS Zip Bundle
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-macos-zip
+          path: ./oracle-macos-arm64.zip
 
       - name: Upload Windows Installer Wizard Artifact
         if: matrix.os == 'windows-latest'
