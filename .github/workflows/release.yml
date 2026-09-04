@@ -31,12 +31,6 @@ jobs:
             binary_name: oracle
             asset_name: oracle-macos-arm64
 
-          # macOS Intel (x86_64)
-          - os: macos-13
-            target: x86_64-apple-darwin
-            binary_name: oracle
-            asset_name: oracle-macos-x86_64
-
           # Linux x86_64
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
