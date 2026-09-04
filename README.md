@@ -1,10 +1,28 @@
-# Oracle 🔮
-### Epigenetic Landscape & Macrophage Phenotype Dynamics Research Workstation
+<p align="center">
+  <img src="assets/app_icon.png" width="130" height="130" alt="Oracle Logo" />
+</p>
 
-[![Rust](https://img.shields.io/badge/Rust-2021_Edition-orange?logo=rust)](https://www.rust-lang.org/)
-[![GUI](https://img.shields.io/badge/GUI-eframe%20%2F%20egui-blue)](https://github.com/emilk/egui)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Domain](https://img.shields.io/badge/Domain-Systems_Biology_%26_Immunology-purple)]()
+<h1 align="center">🔮 Oracle</h1>
+<h3 align="center">Epigenetic Landscape & Macrophage Phenotype Dynamics Research Workstation</h3>
+
+<p align="center">
+  <a href="https://github.com/WVDYC/Oracle/releases/latest">
+    <img src="https://img.shields.io/badge/Download_for_Windows-Setup.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows" />
+  </a>
+  <a href="https://github.com/WVDYC/Oracle/releases/latest">
+    <img src="https://img.shields.io/badge/Download_for_macOS-Apple_Silicon-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS" />
+  </a>
+  <a href="https://github.com/WVDYC/Oracle/releases/latest">
+    <img src="https://img.shields.io/badge/Download_for_Linux-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Rust-2021_Edition-orange?logo=rust" alt="Rust" />
+  <img src="https://img.shields.io/badge/GUI-eframe%20%2F%20egui-blue" alt="GUI" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" />
+  <img src="https://img.shields.io/badge/Domain-Systems_Biology_%26_Immunology-purple" alt="Domain" />
+</p>
 
 > **Interactive In Silico Modeling Platform for Waddington Epigenetic Landscapes, Nonlinear Gene Regulatory Networks (GRN), Langevin Stochastic Dynamics, Flow Cytometry (FACS) Gating, and Pharmacological Drug Perturbations.**
 
