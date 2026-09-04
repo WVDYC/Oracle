@@ -65,17 +65,32 @@ jobs:
         run: |
           cp target/${{ matrix.target }}/release/${{ matrix.binary_name }} ./${{ matrix.asset_name }}
 
+      - name: Build Windows Installer Wizard (Inno Setup)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          choco install innosetup --no-progress -y
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer/windows/setup.iss
+          Copy-Item installer/windows/Output/*.exe ./
+
       - name: Prepare Binary for Unix
         if: matrix.os != 'windows-latest'
         run: |
           cp target/${{ matrix.target }}/release/${{ matrix.binary_name }} ./${{ matrix.asset_name }}
           chmod +x ./${{ matrix.asset_name }}
 
-      - name: Upload Artifact
+      - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset_name }}
           path: ./${{ matrix.asset_name }}
+
+      - name: Upload Windows Installer Wizard Artifact
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-windows-installer
+          path: ./Oracle-*-Windows-Setup-x64.exe
 
   release:
     name: Publish GitHub Release
