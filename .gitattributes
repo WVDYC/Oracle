@@ -1,8 +1,7 @@
 # GitHub Linguist Language Configuration
 # Ensure the repository is correctly recognized as a Rust project
 
-# Exclude web templates and data from language statistics
-website/** linguist-documentation
+# Exclude sample data from language statistics
 data/** linguist-documentation
 *.csv linguist-documentation
 *.txt linguist-documentation
