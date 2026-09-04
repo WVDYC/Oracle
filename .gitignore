@@ -2,5 +2,4 @@
 .DS_Store
 *.png
 *.txt
-waddington_cell_population.csv
-waddington_kinetics_timeseries.csv
+*.csv
