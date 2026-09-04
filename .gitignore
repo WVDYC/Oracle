@@ -1,5 +1,6 @@
 /target
 .DS_Store
 *.png
+!assets/*.png
 *.txt
 *.csv
