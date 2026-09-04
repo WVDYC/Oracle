@@ -2,7 +2,7 @@
   <img src="assets/app_icon.png" width="130" height="130" alt="Oracle Logo" />
 </p>
 
-<h1 align="center">🔮 Oracle</h1>
+<h1 align="center">Oracle</h1>
 <h3 align="center">Epigenetic Landscape & Macrophage Phenotype Dynamics Research Workstation</h3>
 
 <p align="center">
