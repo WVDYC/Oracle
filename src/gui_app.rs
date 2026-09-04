@@ -148,31 +148,49 @@ impl WaddingtonGuiApp {
                         });
 
                         ui.horizontal(|ui| {
-                            ui.label("IL-4 / IL-13 (M2):");
+                            ui.label("IL-4 / IL-13 (M2a):");
                             ui.add(egui::Slider::new(&mut self.model.params.s_il4, 0.0..=3.0).step_by(0.05));
                         });
 
                         ui.horizontal(|ui| {
-                            ui.label("Hypoxia / M3 Signal:");
+                            ui.label("Immune Compl (M2b):");
+                            ui.add(egui::Slider::new(&mut self.model.params.s_immune_complexes, 0.0..=3.0).step_by(0.05));
+                        });
+
+                        ui.horizontal(|ui| {
+                            ui.label("IL-10 / TGF-β (M2c):");
+                            ui.add(egui::Slider::new(&mut self.model.params.s_il10, 0.0..=3.0).step_by(0.05));
+                        });
+
+                        ui.horizontal(|ui| {
+                            ui.label("Hypoxia / TME (M2d):");
                             ui.add(egui::Slider::new(&mut self.model.params.s_hypoxia, 0.0..=3.0).step_by(0.05));
                         });
 
                         ui.add_space(6.0);
-                        ui.label(RichText::new("Quick Cytokine Shocks:").strong().small());
-                        ui.horizontal(|ui| {
-                            if ui.button("⚡ +LPS").clicked() {
+                        ui.label(RichText::new("Quick Polarizing Shocks:").strong().small());
+                        ui.horizontal_wrapped(|ui| {
+                            if ui.button("⚡ M1 (LPS)").clicked() {
                                 self.model.add_cytokine_shock(Phenotype::M1);
                                 self.status_message = "Acute LPS/IFN-γ inflammatory shock applied.".to_string();
                             }
-                            if ui.button("⚡ +IL-4").clicked() {
-                                self.model.add_cytokine_shock(Phenotype::M2);
+                            if ui.button("⚡ M2a (IL-4)").clicked() {
+                                self.model.add_cytokine_shock(Phenotype::M2a);
                                 self.status_message = "IL-4/IL-13 regenerative stimulus applied.".to_string();
                             }
-                            if ui.button("⚡ +Hypoxia").clicked() {
-                                self.model.add_cytokine_shock(Phenotype::M3);
-                                self.status_message = "Severe tissue hypoxia applied.".to_string();
+                            if ui.button("⚡ M2b (IC)").clicked() {
+                                self.model.add_cytokine_shock(Phenotype::M2b);
+                                self.status_message = "Immune complexes (FcγR) stimulus applied.".to_string();
                             }
-                            if ui.button("Washout").clicked() {
+                            if ui.button("⚡ M2c (IL-10)").clicked() {
+                                self.model.add_cytokine_shock(Phenotype::M2c);
+                                self.status_message = "IL-10 deactivation stimulus applied.".to_string();
+                            }
+                            if ui.button("⚡ M2d (Hypoxia)").clicked() {
+                                self.model.add_cytokine_shock(Phenotype::M2d);
+                                self.status_message = "Tumor hypoxia & adenosine stimulus applied.".to_string();
+                            }
+                            if ui.button("Washout (M0)").clicked() {
                                 self.model.add_cytokine_shock(Phenotype::M0);
                                 self.status_message = "Cytokines washed out to basal resting level.".to_string();
                             }
@@ -370,44 +388,107 @@ impl WaddingtonGuiApp {
 
                     let stats = &self.model.stats;
 
-                    let (dom_name, dom_color) = if stats.pct_m1 >= stats.pct_m2 && stats.pct_m1 >= stats.pct_m3 && stats.pct_m1 >= stats.pct_m0 {
-                        ("M1 Pro-inflammatory", Color32::from_rgb(239, 68, 68))
-                    } else if stats.pct_m2 >= stats.pct_m1 && stats.pct_m2 >= stats.pct_m3 && stats.pct_m2 >= stats.pct_m0 {
-                        ("M2 Pro-healing / Repair", Color32::from_rgb(34, 197, 94))
-                    } else if stats.pct_m3 >= stats.pct_m1 && stats.pct_m3 >= stats.pct_m2 && stats.pct_m3 >= stats.pct_m0 {
-                        ("M3 Alternative / Hybrid", Color32::from_rgb(234, 179, 8))
+                    let (dom_name, dom_color) = if stats.pct_m1 >= stats.pct_m2a && stats.pct_m1 >= stats.pct_m2b && stats.pct_m1 >= stats.pct_m2c && stats.pct_m1 >= stats.pct_m2d && stats.pct_m1 >= stats.pct_hybrid && stats.pct_m1 >= stats.pct_m0 {
+                        ("M1 Classic Pro-inflammatory", Color32::from_rgb(239, 68, 68))
+                    } else if stats.pct_m2a >= stats.pct_m1 && stats.pct_m2a >= stats.pct_m2b && stats.pct_m2a >= stats.pct_m2c && stats.pct_m2a >= stats.pct_m2d && stats.pct_m2a >= stats.pct_hybrid && stats.pct_m2a >= stats.pct_m0 {
+                        ("M2a Wound Healing / Repair", Color32::from_rgb(34, 197, 94))
+                    } else if stats.pct_m2b >= stats.pct_m1 && stats.pct_m2b >= stats.pct_m2a && stats.pct_m2b >= stats.pct_m2c && stats.pct_m2b >= stats.pct_m2d && stats.pct_m2b >= stats.pct_hybrid && stats.pct_m2b >= stats.pct_m0 {
+                        ("M2b Immune-Complex Regulatory", Color32::from_rgb(168, 85, 247))
+                    } else if stats.pct_m2c >= stats.pct_m1 && stats.pct_m2c >= stats.pct_m2a && stats.pct_m2c >= stats.pct_m2b && stats.pct_m2c >= stats.pct_m2d && stats.pct_m2c >= stats.pct_hybrid && stats.pct_m2c >= stats.pct_m0 {
+                        ("M2c Deactivated / Efferocytosis", Color32::from_rgb(20, 184, 166))
+                    } else if stats.pct_m2d >= stats.pct_m1 && stats.pct_m2d >= stats.pct_m2a && stats.pct_m2d >= stats.pct_m2b && stats.pct_m2d >= stats.pct_m2c && stats.pct_m2d >= stats.pct_hybrid && stats.pct_m2d >= stats.pct_m0 {
+                        ("M2d Tumor-Associated (TAM)", Color32::from_rgb(249, 115, 22))
+                    } else if stats.pct_hybrid >= stats.pct_m1 && stats.pct_hybrid >= stats.pct_m2a && stats.pct_hybrid >= stats.pct_m0 {
+                        ("M-Hybrid Transitional Plastic", Color32::from_rgb(234, 179, 8))
                     } else {
-                        ("M0 Naive / Resting", Color32::from_rgb(148, 163, 184))
+                        ("M0 Naive / Resting Baseline", Color32::from_rgb(148, 163, 184))
                     };
 
                     ui.label("Dominant Population State:");
-                    ui.label(RichText::new(dom_name).color(dom_color).strong().size(15.0));
-                    ui.add_space(8.0);
+                    ui.label(RichText::new(dom_name).color(dom_color).strong().size(14.0));
+                    ui.add_space(6.0);
 
-                    // Phenotype Distribution Breakdown
-                    ui.label(RichText::new("Phenotype Fraction Distribution:").strong());
+                    // Phenotype Distribution Breakdown (Murray et al. 2014)
+                    ui.label(RichText::new("Phenotype Fraction Distribution (Murray 2014):").strong().small());
 
                     ui.horizontal(|ui| {
-                        ui.label(RichText::new("M1 (Attack):").color(Color32::from_rgb(248, 113, 113)));
+                        ui.label(RichText::new("M1 (Attack):").color(Color32::from_rgb(248, 113, 113)).small());
                         ui.add(ProgressBar::new(stats.pct_m1 / 100.0).text(format!("{:.1}% ({})", stats.pct_m1, stats.count_m1)));
                     });
 
                     ui.horizontal(|ui| {
-                        ui.label(RichText::new("M2 (Repair):").color(Color32::from_rgb(74, 222, 128)));
-                        ui.add(ProgressBar::new(stats.pct_m2 / 100.0).text(format!("{:.1}% ({})", stats.pct_m2, stats.count_m2)));
+                        ui.label(RichText::new("M2a (Repair):").color(Color32::from_rgb(74, 222, 128)).small());
+                        ui.add(ProgressBar::new(stats.pct_m2a / 100.0).text(format!("{:.1}% ({})", stats.pct_m2a, stats.count_m2a)));
                     });
 
                     ui.horizontal(|ui| {
-                        ui.label(RichText::new("M3 (Hybrid):").color(Color32::from_rgb(250, 204, 21)));
-                        ui.add(ProgressBar::new(stats.pct_m3 / 100.0).text(format!("{:.1}% ({})", stats.pct_m3, stats.count_m3)));
+                        ui.label(RichText::new("M2b (Regul):").color(Color32::from_rgb(192, 132, 252)).small());
+                        ui.add(ProgressBar::new(stats.pct_m2b / 100.0).text(format!("{:.1}% ({})", stats.pct_m2b, stats.count_m2b)));
                     });
 
                     ui.horizontal(|ui| {
-                        ui.label(RichText::new("M0 (Naive):").color(Color32::from_rgb(148, 163, 184)));
+                        ui.label(RichText::new("M2c (Effer):").color(Color32::from_rgb(45, 212, 191)).small());
+                        ui.add(ProgressBar::new(stats.pct_m2c / 100.0).text(format!("{:.1}% ({})", stats.pct_m2c, stats.count_m2c)));
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new("M2d (TAM):").color(Color32::from_rgb(251, 146, 60)).small());
+                        ui.add(ProgressBar::new(stats.pct_m2d / 100.0).text(format!("{:.1}% ({})", stats.pct_m2d, stats.count_m2d)));
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new("Hybrid:").color(Color32::from_rgb(250, 204, 21)).small());
+                        ui.add(ProgressBar::new(stats.pct_hybrid / 100.0).text(format!("{:.1}% ({})", stats.pct_hybrid, stats.count_hybrid)));
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new("M0 (Naive):").color(Color32::from_rgb(148, 163, 184)).small());
                         ui.add(ProgressBar::new(stats.pct_m0 / 100.0).text(format!("{:.1}% ({})", stats.pct_m0, stats.count_m0)));
                     });
 
-                    ui.add_space(10.0);
+                    ui.add_space(8.0);
+                    ui.separator();
+
+                    // Immunometabolism Monitor (O'Neill & Pearce)
+                    ui.heading("⚡ Immunometabolism Monitor");
+                    ui.label(RichText::new("Metabolic Reprogramming (Warburg vs OXPHOS):").small().italics());
+                    ui.add_space(3.0);
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new("Glycolysis (Warburg):").small().color(Color32::from_rgb(248, 113, 113)));
+                        ui.add(ProgressBar::new((stats.mean_glycolysis / 2.5).clamp(0.0, 1.0)).text(format!("{:.2} flux", stats.mean_glycolysis)));
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new("Mitochondrial OXPHOS:").small().color(Color32::from_rgb(74, 222, 128)));
+                        ui.add(ProgressBar::new((stats.mean_oxphos / 2.5).clamp(0.0, 1.0)).text(format!("{:.2} flux", stats.mean_oxphos)));
+                    });
+
+                    let (meta_label, meta_color) = if stats.mean_metabolic_ratio > 1.4 {
+                        ("Warburg Aerobic Glycolytic (M1 Profile)", Color32::from_rgb(239, 68, 68))
+                    } else if stats.mean_metabolic_ratio < 0.7 {
+                        ("Mitochondrial Respiration / FAO (M2 Profile)", Color32::from_rgb(34, 197, 94))
+                    } else {
+                        ("Balanced / Plastic Intermediate", Color32::from_rgb(234, 179, 8))
+                    };
+
+                    ui.horizontal(|ui| {
+                        ui.label("Metabolic State:");
+                        ui.label(RichText::new(meta_label).color(meta_color).small().strong());
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label("Glyc/OXPHOS Ratio:");
+                        ui.label(RichText::new(format!("{:.2}", stats.mean_metabolic_ratio)).strong());
+                        ui.label(format!("| Itaconate/Succ: {:.2}", stats.mean_itaconate_succinate));
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label("ATP Generation Eff:");
+                        ui.label(RichText::new(format!("{:.1}%", stats.mean_atp_efficiency * 100.0)).color(Color32::from_rgb(56, 189, 248)).strong());
+                    });
+
+                    ui.add_space(8.0);
                     ui.separator();
 
                     // FACS Quadrant Live Summary
@@ -417,7 +498,7 @@ impl WaddingtonGuiApp {
                     ui.label(format!("Q3 (Double⁻ Naive):    {:.1}%", self.facs_report.pct_q3));
                     ui.label(format!("Q4 (M1 Attack):        {:.1}% (MFI={:.2})", self.facs_report.pct_q4, self.facs_report.mfi_stat1_q4));
 
-                    ui.add_space(10.0);
+                    ui.add_space(8.0);
                     ui.separator();
 
                     // Thermodynamic & Information Metrics
@@ -428,9 +509,9 @@ impl WaddingtonGuiApp {
                         ui.label("Shannon Diversity (H):");
                         ui.label(RichText::new(format!("{:.4}", stats.shannon_entropy)).strong().color(Color32::from_rgb(192, 132, 252)));
                     });
-                    let entropy_desc = if stats.shannon_entropy > 1.1 {
-                        "High Plasticity / Mixed Heterogeneous state"
-                    } else if stats.shannon_entropy > 0.6 {
+                    let entropy_desc = if stats.shannon_entropy > 1.3 {
+                        "High Plasticity / Highly Heterogeneous state"
+                    } else if stats.shannon_entropy > 0.7 {
                         "Moderate Intermediate Specialization"
                     } else {
                         "Uniform Homogeneous Lineage Commitment"
@@ -447,7 +528,7 @@ impl WaddingtonGuiApp {
                         ui.label(RichText::new(format!("{:.3}", stats.barrier_m2_m1)).strong());
                     });
 
-                    ui.add_space(10.0);
+                    ui.add_space(8.0);
                     ui.separator();
 
                     // Biological Interpretation Card
@@ -455,13 +536,17 @@ impl WaddingtonGuiApp {
                     ui.add_space(4.0);
 
                     let interpretation_text = if self.model.params.s_lps > 1.2 && self.model.params.s_il4 < 0.5 {
-                        "Pro-inflammatory Acute Response: High LPS/IFN-γ drives dominant STAT1/NF-κB activation. The M1 valley is the global minimum; energy barrier against M2 repolarization is high."
+                        "Pro-inflammatory Acute Response: High LPS/IFN-γ drives dominant STAT1/NF-κB activation, broken Krebs cycle (itaconate accumulation), and Warburg aerobic glycolysis."
                     } else if self.model.params.s_il4 > 1.2 && self.model.params.s_lps < 0.5 {
-                        "Pro-healing Tissue Remodeling: IL-4/IL-13 stimulation activates STAT6/PPAR-γ pathways. Macrophages commit to tissue regeneration and anti-inflammatory resolution (M2 valley)."
+                        "M2a Wound Healing: IL-4/IL-13 stimulation activates STAT6, Arg1, and CD206, supported by mitochondrial oxidative phosphorylation (OXPHOS) and fatty acid oxidation."
+                    } else if self.model.params.s_immune_complexes > 1.0 {
+                        "M2b Regulatory State: FcγR cross-linking with TLR stimulation triggers CD86+ and high anti-inflammatory IL-10 secretion with moderate glycolytic expenditure."
+                    } else if self.model.params.s_il10 > 1.0 {
+                        "M2c Deactivated Resolution: IL-10/TGF-β promotes high CD163 and MerTK expression, driving silent efferocytosis of apoptotic debris."
                     } else if self.model.params.s_hypoxia > 1.0 {
-                        "Hypoxic Microenvironment Adaptation: Hypoxia stabilizes HIF-1α, promoting phenotypic plasticity and co-expression of M1/M2 markers (TAM/M3-like phenotype)."
+                        "M2d Tumor-Associated (TAM) Adapt: Hypoxia stabilizes HIF-1α, driving potent VEGF secretion, angiogenic switch, and glycolytic shift in solid tumor microenvironment."
                     } else if self.model.params.s_lps > 0.8 && self.model.params.s_il4 > 0.8 {
-                        "Antagonistic Co-stimulation / Bimodal Bistability: Competing cytokine signals create a bistable landscape where single-cell noise determines stochastic fate choice."
+                        "Antagonistic Co-stimulation / Bimodal Bistability: Competing cytokine signals create a multi-well landscape where single-cell noise determines stochastic fate choice."
                     } else {
                         "Homeostatic Basal Resting State: Macrophages remain predominantly uncommitted (M0) around the shallow central basin."
                     };
@@ -603,11 +688,30 @@ impl WaddingtonGuiApp {
             ui.monospace("H = - ∑ p_k · ln(p_k)");
 
             ui.add_space(10.0);
-            ui.label(RichText::new("4. Key Academic References & Literature Citations").strong().size(14.0));
+            ui.label(RichText::new("4. Immunometabolic Reprogramming (Warburg vs OXPHOS)").strong().size(14.0));
+            ui.label("Metabolic state is coupled to epigenetic fate (O'Neill & Pearce, Nat Immunol 2016):");
+            ui.monospace("J_glyc  = (0.30 + 0.80·x^1.4 + 0.65·Hypoxia + 0.30·LPS) / (1 + 0.35·y)");
+            ui.monospace("J_oxphos = (0.35 + 0.90·y^1.4 + 0.40·IL4) / (1 + 0.60·x)");
+            ui.label("M1 cells exhibit broken Krebs cycle (itaconate/succinate shunt, aerobic glycolysis), while M2 cells utilize mitochondrial fatty acid oxidation (FAO) and OXPHOS.");
+
+            ui.add_space(10.0);
+            ui.label(RichText::new("5. Macrophage Polarization Spectrum (Murray et al. 2014 Immunity)").strong().size(14.0));
+            ui.label("• M0: Uncommitted naive resting baseline");
+            ui.label("• M1: Classical inflammatory activation (LPS + IFN-γ; STAT1, iNOS, CD80, CD86, TNF-α)");
+            ui.label("• M2a: Alternative activation / wound healing (IL-4 / IL-13; STAT6, Arg1, CD206/MRC1)");
+            ui.label("• M2b: Regulatory activation (Immune complexes + TLR; CD86+, high IL-10 secretion)");
+            ui.label("• M2c: Deactivated resolution (IL-10 / TGF-β; CD163, MerTK, apoptotic efferocytosis)");
+            ui.label("• M2d: Tumor-associated macrophages / TAM (Hypoxia, adenosine; VEGF, pro-angiogenic)");
+            ui.label("• M-Hybrid: Double-positive transitional plastic intermediate state");
+
+            ui.add_space(10.0);
+            ui.label(RichText::new("6. Key Academic References & Literature Citations").strong().size(14.0));
+            ui.label("• Murray, P. J., et al. (2014). Macrophage activation and polarization: nomenclature and experimental guidelines. Immunity, 41(1), 14-20.");
+            ui.label("• O'Neill, L. A. J., & Pearce, E. J. (2016). Immunometabolism governs dendritic cell and macrophage function. J. Exp. Med. / Nature Reviews Immunology, 16(9), 553-565.");
+            ui.label("• Mills, E. L., et al. (2016). Succinate dehydrogenase and itaconate metabolic remodeling in M1 macrophages. Cell, 167(2), 457-470.");
             ui.label("• Waddington, C. H. (1957). The Strategy of the Genes. Allen & Unwin, London.");
             ui.label("• Huang, S., et al. (2005). Bifurcation dynamics in lineage-commitment in bipotent progenitor cells. Dev. Biol., 280(1), 40-58.");
             ui.label("• Sica, A., & Mantovani, A. (2012). Macrophage plasticity and polarization: in vivo veritas. J. Clin. Invest., 122(3), 787-795.");
-            ui.label("• Murray, P. J., et al. (2014). Macrophage activation and polarization: nomenclature and experimental guidelines. Immunity, 41(1), 14-20.");
             ui.label("• Zhou, J. X., et al. (2012). Quasi-potential landscape in complex dynamical systems. Physical Review E, 85(6), 061918.");
         });
     }

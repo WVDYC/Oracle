@@ -123,8 +123,11 @@ impl CanvasRenderer {
                     let color = match cell.phenotype {
                         Phenotype::M0 => Color32::from_rgb(180, 200, 220),
                         Phenotype::M1 => Color32::from_rgb(255, 120, 120),
-                        Phenotype::M2 => Color32::from_rgb(100, 240, 150),
-                        Phenotype::M3 => Color32::from_rgb(255, 220, 100),
+                        Phenotype::M2a => Color32::from_rgb(100, 240, 150),
+                        Phenotype::M2b => Color32::from_rgb(192, 132, 252),
+                        Phenotype::M2c => Color32::from_rgb(45, 212, 191),
+                        Phenotype::M2d => Color32::from_rgb(251, 146, 60),
+                        Phenotype::MHybrid => Color32::from_rgb(250, 204, 21),
                     };
 
                     let s = 4.5;
@@ -198,6 +201,9 @@ impl CanvasRenderer {
                 let force_mag = (fx * fx + fy * fy).sqrt();
                 let phenotype = crate::model::classify_cell_phenotype(bio_x, bio_y);
 
+                let meta = crate::model::compute_cell_metabolism(bio_x, bio_y, params);
+                let markers = crate::model::compute_cell_markers(bio_x, bio_y, params);
+
                 painter.line_segment(
                     [Pos2::new(plot_rect.min.x, mouse_pos.y), Pos2::new(plot_rect.max.x, mouse_pos.y)],
                     Stroke::new(1.0, Color32::from_rgba_unmultiplied(255, 255, 255, 60)),
@@ -208,12 +214,22 @@ impl CanvasRenderer {
                 );
 
                 egui::show_tooltip(ui.ctx(), response.id, |ui| {
-                    ui.label(egui::RichText::new("🔬 Epigenetic Landscape Probe").strong());
-                    ui.label(format!("STAT1 (M1): {:.3}", bio_x));
-                    ui.label(format!("STAT6 (M2): {:.3}", bio_y));
+                    ui.label(egui::RichText::new("🔬 Epigenetic Landscape & Metabolism Probe").strong());
+                    ui.label(format!("STAT1 (M1 Axis): {:.3}", bio_x));
+                    ui.label(format!("STAT6 (M2 Axis): {:.3}", bio_y));
                     ui.label(format!("Potential U(x,y): {:.3}", potential));
                     ui.label(format!("Drift Force ‖F‖: {:.3}", force_mag));
-                    ui.label(format!("Local Fate: {}", phenotype.name()));
+                    ui.label(format!("Predicted State: {}", phenotype.name()));
+                    ui.separator();
+                    ui.label(egui::RichText::new("⚡ Immunometabolic Flux:").small().strong());
+                    ui.label(format!("Glycolytic Flux (Warburg): {:.2}", meta.glycolysis_flux));
+                    ui.label(format!("Mitochondrial OXPHOS:     {:.2}", meta.oxphos_flux));
+                    ui.label(format!("Metabolic Ratio (Glyc/OX): {:.2}", meta.metabolic_ratio));
+                    ui.label(format!("Itaconate/Succinate Index: {:.2}", meta.itaconate_succinate_index));
+                    ui.separator();
+                    ui.label(egui::RichText::new("🏷 Key Markers:").small().strong());
+                    ui.label(format!("CD80: {:.2} | iNOS: {:.2} | TNF-α: {:.2}", markers.cd80, markers.inos, markers.tnf_alpha));
+                    ui.label(format!("CD206: {:.2} | Arg1: {:.2} | CD163: {:.2} | VEGF: {:.2}", markers.cd206, markers.arg1, markers.cd163, markers.vegf));
                     ui.add_space(3.0);
                     ui.label(egui::RichText::new("💡 Click/drag on map to drop new cells").italics().small());
                 });
@@ -669,9 +685,9 @@ impl CanvasRenderer {
     {
         let attractors = [
             (0.45, 0.45, "M0 (Naive)", Color32::from_rgb(160, 174, 192)),
-            (2.20, 0.30, "M1 (Pro-inflammatory)", Color32::from_rgb(239, 68, 68)),
-            (0.30, 2.20, "M2 (Pro-healing)", Color32::from_rgb(34, 197, 94)),
-            (1.80, 1.80, "M3 / Hybrid", Color32::from_rgb(234, 179, 8)),
+            (2.20, 0.30, "M1 (Pro-inflammatory / Glycolysis)", Color32::from_rgb(239, 68, 68)),
+            (0.30, 2.20, "M2a (Wound Healing / OXPHOS)", Color32::from_rgb(34, 197, 94)),
+            (1.80, 1.80, "M2d (TAM) / M-Hybrid", Color32::from_rgb(249, 115, 22)),
         ];
 
         for (bx, by, text, color) in attractors {

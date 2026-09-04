@@ -266,6 +266,16 @@ pub fn export_simulation_csv(cells: &[SingleCell], params: &BiophysicalParams) -
         "Velocity_X",
         "Velocity_Y",
         "Predicted_Phenotype",
+        "Glycolysis_Flux",
+        "OXPHOS_Flux",
+        "Metabolic_Ratio",
+        "CD80",
+        "CD86",
+        "iNOS",
+        "CD206",
+        "Arg1",
+        "CD163",
+        "VEGF",
         "LPS_Signal",
         "IL4_Signal",
         "Hypoxia_Signal",
@@ -279,6 +289,16 @@ pub fn export_simulation_csv(cells: &[SingleCell], params: &BiophysicalParams) -
             format!("{:.4}", cell.vx),
             format!("{:.4}", cell.vy),
             cell.phenotype.short_name().to_string(),
+            format!("{:.3}", cell.metabolic.glycolysis_flux),
+            format!("{:.3}", cell.metabolic.oxphos_flux),
+            format!("{:.3}", cell.metabolic.metabolic_ratio),
+            format!("{:.2}", cell.markers.cd80),
+            format!("{:.2}", cell.markers.cd86),
+            format!("{:.2}", cell.markers.inos),
+            format!("{:.2}", cell.markers.cd206),
+            format!("{:.2}", cell.markers.arg1),
+            format!("{:.2}", cell.markers.cd163),
+            format!("{:.2}", cell.markers.vegf),
             format!("{:.3}", params.s_lps),
             format!("{:.3}", params.s_il4),
             format!("{:.3}", params.s_hypoxia),
@@ -298,7 +318,10 @@ pub fn export_time_series_csv(history: &VecDeque<TimeSeriesPoint>) -> String {
         "Mean_STAT6_M2",
         "Shannon_Entropy",
         "Percent_M1",
-        "Percent_M2",
+        "Percent_M2a",
+        "Percent_M2d",
+        "Mean_Glycolysis",
+        "Mean_OXPHOS",
     ]);
 
     for pt in history {
@@ -308,7 +331,10 @@ pub fn export_time_series_csv(history: &VecDeque<TimeSeriesPoint>) -> String {
             format!("{:.4}", pt.mean_stat6),
             format!("{:.4}", pt.entropy),
             format!("{:.2}", pt.pct_m1),
-            format!("{:.2}", pt.pct_m2),
+            format!("{:.2}", pt.pct_m2a),
+            format!("{:.2}", pt.pct_m2d),
+            format!("{:.3}", pt.mean_glycolysis),
+            format!("{:.3}", pt.mean_oxphos),
         ]);
     }
 
@@ -356,9 +382,11 @@ pub fn export_population_summary_report(stats: &PopulationStats, params: &Biophy
         Simulation Time Elapsed: {:.2}s\n\
         Total Simulated Cells:   {}\n\n\
         --- Microenvironmental Inputs ---\n\
-        LPS / IFN-g Signal:      {:.3}\n\
+        LPS / IFN-γ Signal:      {:.3}\n\
         IL-4 / IL-13 Signal:     {:.3}\n\
-        Hypoxia / M3 Signal:     {:.3}\n\
+        Immune Complexes (M2b):  {:.3}\n\
+        IL-10 / TGF-β (M2c):     {:.3}\n\
+        Hypoxia / TAM (M2d):     {:.3}\n\
         Hill Cooperativity (n):  {:.1}\n\
         Mutual Cross-Repression: {:.2}\n\
         Gene Expression Noise:   {:.3}\n\n\
@@ -366,13 +394,22 @@ pub fn export_population_summary_report(stats: &PopulationStats, params: &Biophy
         JAK1/2 Inhibitor:        {:.2}\n\
         Anti-IL4R mAb:           {:.2}\n\
         TLR4 Antagonist:         {:.2}\n\
-        HIF-1a Inhibitor:        {:.2}\n\
+        HIF-1α Inhibitor:        {:.2}\n\
         HDAC Inhibitor:          {:.2}\n\n\
-        --- Phenotypic Distribution ---\n\
+        --- Macrophage Subtypes Distribution (Murray et al. 2014) ---\n\
         M0 (Naive / Baseline):   {} ({:.1}%)\n\
         M1 (Pro-inflammatory):   {} ({:.1}%)\n\
-        M2 (Pro-healing):        {} ({:.1}%)\n\
-        M3 (Alternative/Hybrid): {} ({:.1}%)\n\n\
+        M2a (Wound Healing):     {} ({:.1}%)\n\
+        M2b (Regulatory):        {} ({:.1}%)\n\
+        M2c (Deactivated):       {} ({:.1}%)\n\
+        M2d (Tumor-Associated):  {} ({:.1}%)\n\
+        M-Hybrid (Plastic):      {} ({:.1}%)\n\n\
+        --- Immunometabolic Flux (O'Neill & Pearce) ---\n\
+        Mean Glycolytic Flux:    {:.3} (Warburg effect)\n\
+        Mean OXPHOS Flux:        {:.3} (Mitochondrial respiration)\n\
+        Metabolic Ratio (G/O):   {:.3}\n\
+        Itaconate/Succinate Idx: {:.3} (Krebs cycle break)\n\
+        ATP Energy Efficiency:   {:.1}%\n\n\
         --- System Biology & Thermodynamic Metrics ---\n\
         Population Center:       STAT1={:.3}, STAT6={:.3}\n\
         Shannon Diversity Index: {:.4} (Heterogeneity)\n\
@@ -382,6 +419,8 @@ pub fn export_population_summary_report(stats: &PopulationStats, params: &Biophy
         stats.total_cells,
         params.s_lps,
         params.s_il4,
+        params.s_immune_complexes,
+        params.s_il10,
         params.s_hypoxia,
         params.hill_n,
         params.gamma,
@@ -395,10 +434,21 @@ pub fn export_population_summary_report(stats: &PopulationStats, params: &Biophy
         stats.pct_m0,
         stats.count_m1,
         stats.pct_m1,
-        stats.count_m2,
-        stats.pct_m2,
-        stats.count_m3,
-        stats.pct_m3,
+        stats.count_m2a,
+        stats.pct_m2a,
+        stats.count_m2b,
+        stats.pct_m2b,
+        stats.count_m2c,
+        stats.pct_m2c,
+        stats.count_m2d,
+        stats.pct_m2d,
+        stats.count_hybrid,
+        stats.pct_hybrid,
+        stats.mean_glycolysis,
+        stats.mean_oxphos,
+        stats.mean_metabolic_ratio,
+        stats.mean_itaconate_succinate,
+        stats.mean_atp_efficiency * 100.0,
         stats.mean_x,
         stats.mean_y,
         stats.shannon_entropy,
@@ -426,7 +476,7 @@ mod tests {
         let ds = parse_csv_data(csv_content, "Test Dataset").expect("Failed to parse CSV");
         assert_eq!(ds.cells.len(), 3);
         assert_eq!(ds.cells[0].phenotype, Phenotype::M1);
-        assert_eq!(ds.cells[1].phenotype, Phenotype::M2);
+        assert_eq!(ds.cells[1].phenotype, Phenotype::M2a);
         assert_eq!(ds.cells[2].phenotype, Phenotype::M0);
     }
 }
