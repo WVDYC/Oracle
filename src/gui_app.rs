@@ -90,7 +90,7 @@ impl WaddingtonGuiApp {
         egui::TopBottomPanel::top("top_header_panel").show(ctx, |ui| {
             ui.add_space(4.0);
             ui.horizontal(|ui| {
-                ui.heading(RichText::new("🔮 Oracle").strong().color(Color32::from_rgb(56, 189, 248)));
+                ui.heading(RichText::new("Oracle").strong().color(Color32::from_rgb(56, 189, 248)));
                 ui.label(RichText::new("Epigenetic Landscape & Phenotype Dynamics Workstation").color(Color32::from_rgb(148, 163, 184)));
 
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {

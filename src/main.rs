@@ -36,7 +36,7 @@ fn main() -> Result<(), eframe::Error> {
 
     println!("Starting Oracle Scientific Research Workstation (eframe/egui)...");
     eframe::run_native(
-        "🔮 Oracle | Epigenetic Landscape & Phenotype Dynamics Workstation",
+        "Oracle | Epigenetic Landscape & Phenotype Dynamics Workstation",
         options,
         Box::new(|_cc| Box::new(WaddingtonGuiApp::default())),
     )

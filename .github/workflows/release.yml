@@ -106,7 +106,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.0
-          name: "🔮 Oracle v1.0.0 — Epigenetic Landscape & Phenotype Workstation"
+          name: "Oracle v1.0.0 — Epigenetic Landscape & Phenotype Workstation"
           files: |
             release_assets/*/*
           generate_release_notes: true
